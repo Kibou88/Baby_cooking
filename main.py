@@ -18,7 +18,6 @@ valid = "n"
 while valid == 'n':  #Boucle pour permettre à l'utilisateur de changer ses choix
   message()  #Affiche l'interface
   user_choice = choices()  #Permet à l'utilisateur de faire un choix
-  #Pas de fonction pour la GESTION D'ERREUR
   format_choice = formatting(user_choice)
   valid = confirm()
 #------------Test ok----------------------
@@ -29,6 +28,7 @@ page_recettes, page = connexion_auto()  #Fait la connexion automatiquement + ren
 
 #-----------Affichage de la page "Recette" en fonction des choix utilisateurs---------------
 page_recettes_choisies = "" #Variable pour stocker l'url de la page recette
+# print("Valeur de format choice: ", format_choice)
 page_recettes_choisies = url_including_choice(page_recettes, format_choice)  #Ajoute les choix utilisateurs dans l'url
 page.get(page_recettes_choisies)
 #-----------Test ok----------------------
@@ -37,7 +37,7 @@ page.get(page_recettes_choisies)
 balises_li = []  #Initialisation de la liste pour récupérer les balises <li>
 liste_nom = []  #Initialisation de la liste pour récupérer les titres
 liste_lien = []  #Initialisation de la liste pour récupérer les liens
-nombre_defilement_bas = 20
+nombre_defilement_bas = 200
 
 
 defilement_auto_bas(page,nombre_defilement_bas) #Fonction pour faire défiler la page + barre de chargement

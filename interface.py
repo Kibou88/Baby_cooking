@@ -18,13 +18,11 @@ def choices():
 
 #Fonction pour séparer les choix utilisateurs i.e:'0-1-11' en une liste i.e:[0,1,11]
 def formatting(user_choice):
-  if user_choice == "20":
-      format_choice = "20"
-  else:
+  if "-" in user_choice:
     user_choice = user_choice.split("-")  # Sépare les choix en 3 parties
-    format_choice = user_choice.sort()
-  print("\033[0;34mVous avez choisi: ", format_choice)
-  return format_choice
+    user_choice.sort()
+  print("\033[0;34mVous avez choisi: ", user_choice)
+  return user_choice
 
 #Fonction pour demander à l'utilisateur de confirmer ses choix
 def confirm():

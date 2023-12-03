@@ -2,27 +2,40 @@
 def url_including_choice(page_recettes, format_choice):
   page_recettes = page_recettes+"?"
   count = 0
-  if format_choice == "20": # Famille
-    page_recettes = "https://www.cuisinez-pour-bebe.fr/recette-bebe/?wp_recettes%5BrefinementList%5D%5Btype%5D%5B0%5D=Parents-b%C3%A9b%C3%A9"
-  else:
+  if len(format_choice) <= 2: # Si il n'y a qu'1 choix
+    match format_choice:
+      case "0":  # Age entre 9 et 12 mois
+        page_recettes = page_recettes + "wp_recettes%5BrefinementList%5D%5Bage%5D%5B0%5D=9%20%C3%A0%2012%20mois"
+      case "1":  # Age de 12 mois et +
+        page_recettes = page_recettes + "wp_recettes%5BrefinementList%5D%5Bage%5D%5B1%5D=12%20mois%20et%20%2B"
+      case "10":  # Repas sucrée
+        page_recettes = page_recettes + "wp_recettes%5BrefinementList%5D%5Bmoment%5D%5B0%5D=Sucr%C3%A9"
+      case "11":  # Repas salée
+        page_recettes = page_recettes + "wp_recettes%5BrefinementList%5D%5Bmoment%5D%5B0%5D=Sal%C3%A9"
+      case "20":  # Repas famille
+        page_recettes = page_recettes +"wp_recettes%5BrefinementList%5D%5Btype%5D%5B0%5D=Parents-b%C3%A9b%C3%A9"
+        print("Page famille choisie")
+      case _:  # Si aucun choix n'est sélectionné
+        print(f"Le choix {format_choice} n'est pas valide")
+  elif len(format_choice) > 2: # Si il y a plusieurs choix
     for i in format_choice:
-      if count != 0 and count < len(format_choice):
-        page_recettes = page_recettes +"&"
-      match i:
-        case "0": #Age entre 9 et 12 mois
-          page_recettes = page_recettes+"wp_recettes%5BrefinementList%5D%5Bage%5D%5B0%5D=9%20%C3%A0%2012%20mois"
-          count += 1
-        case "1": #Age de 12 mois et +
-          page_recettes = page_recettes+"wp_recettes%5BrefinementList%5D%5Bage%5D%5B1%5D=12%20mois%20et%20%2B"
-          count += 1
-        case "10": #Repas sucrée
-          page_recettes = page_recettes+"wp_recettes%5BrefinementList%5D%5Bmoment%5D%5B0%5D=Sucr%C3%A9"
-          count += 1
-        case "11": #Repas salée
-          page_recettes = page_recettes+"wp_recettes%5BrefinementList%5D%5Bmoment%5D%5B0%5D=Sal%C3%A9"
-          count += 1
-        case _: #Si aucun choix n'est sélectionné
-          print(f"Le choix {i} n'est pas valide")
+        if count != 0 and count < len(format_choice):
+          page_recettes = page_recettes +"&"
+        match i:
+          case "0": #Age entre 9 et 12 mois
+            page_recettes = page_recettes+"wp_recettes%5BrefinementList%5D%5Bage%5D%5B0%5D=9%20%C3%A0%2012%20mois"
+            count += 1
+          case "1": #Age de 12 mois et +
+            page_recettes = page_recettes+"wp_recettes%5BrefinementList%5D%5Bage%5D%5B1%5D=12%20mois%20et%20%2B"
+            count += 1
+          case "10": #Repas sucrée
+            page_recettes = page_recettes+"wp_recettes%5BrefinementList%5D%5Bmoment%5D%5B0%5D=Sucr%C3%A9"
+            count += 1
+          case "11": #Repas salée
+            page_recettes = page_recettes+"wp_recettes%5BrefinementList%5D%5Bmoment%5D%5B0%5D=Sal%C3%A9"
+            count += 1
+          case _: #Si aucun choix n'est sélectionné
+            print(f"Le choix {i} n'est pas valide en multi choix")
   return page_recettes
 
 #Fonction pour parser la page en fonction des choix utilisateurs
