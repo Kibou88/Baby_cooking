@@ -14,6 +14,7 @@ Thumbs.db
 Backup of *.doc*
 
 # Excel temporary
+.~lock*.xls*
 ~$*.xls*
 
 # Excel Backup File
